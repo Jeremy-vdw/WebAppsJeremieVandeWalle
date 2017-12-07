@@ -15,18 +15,28 @@ import { User } from '../../models/user.model';
 export class SummaryDetailComponent implements OnInit {
   private _summary: Summary;
   private _readOnlyRate: Boolean = false;
+  averageRating: number;    
 
 
   constructor(private authService: AuthenticationService,
     private route: ActivatedRoute, private summaryDataService: SummaryDataService) { }
 
   ngOnInit() {
-    this.route.data.subscribe(item => this._summary = item['summary']);
+    console.log(this.authService.user$.value);
+    this.route.data.subscribe(item => {
+      this._summary = item['summary'];
+      if (item['summary'].user.username === this.authService.user$.value) {
+        // user is owner of summary
+        this._readOnlyRate = true;
+      }
+    });
     this._summary.ratings.forEach(item => {
       if (item.user.username === this.authService.user$.value) {
+        // user already vote
           this._readOnlyRate = true;
       }
     });
+    this.generateAverageRating();
   }
 
   get summary(): Summary {
@@ -35,15 +45,6 @@ export class SummaryDetailComponent implements OnInit {
 
   get numberOfRatings(): number {
     return this._summary.ratings.length;
-  }
-
-  get averageRating(): number {
-    if (this._summary.ratings.length > 0) {
-      let sum = 0;
-      this._summary.ratings.forEach(item => sum += item.number);
-      return sum / this._summary.ratings.length;
-    }
-   return 0;
   }
 
   get readOnlyRate(): Boolean {
@@ -58,12 +59,22 @@ export class SummaryDetailComponent implements OnInit {
     this._summary.addRating(rating);
     this._readOnlyRate = true;
     this.summaryDataService.addRatingToSummary(this._summary, rating).subscribe();
+    this.generateAverageRating();
   }
 
   newCommentAdded(comment) {
     /* update front end without reload */
     comment.user = new User(this.authService.user$.value);
     this._summary.addComment(comment);
+  }
+
+  generateAverageRating() {
+    if (this._summary.ratings.length > 0) {
+      let sum = 0;
+      this._summary.ratings.forEach(item => sum += item.number);
+      this.averageRating = sum / this._summary.ratings.length;
+    }
+   this.averageRating = 0;
   }
 
   download() {
@@ -93,7 +104,7 @@ export class SummaryDetailComponent implements OnInit {
   get usernumber(): number {
     let number = 0;
     for (let i = 0; i < 3; i++) {
-        number += this.summary.user.username.charCodeAt(i) - 97;
+        number += this._summary.user.username.charCodeAt(i) - 97;
     }
     return number;
 }

@@ -33,14 +33,14 @@ export class OwnSummaryComponent implements OnInit {
     return this._summarieCount;
   }
 
-  get usernumber(): string {
+  get usernumber(): number {
     let user;
     this.currentUser.subscribe(item => user = item);
     let number = 0;
     for (let i = 0; i < 3; i++) {
         number += user.charCodeAt(i) - 97;
     }
-    return '33';
+    return number;
 }
 
 }

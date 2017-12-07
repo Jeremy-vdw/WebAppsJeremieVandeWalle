@@ -14,7 +14,7 @@ export class AddCommentComponent implements OnInit {
   @Output() public newComment = new EventEmitter<Comment>();
   @Input() public summary: Summary;
   public transitionController = new TransitionController();
-  private comment: FormGroup;
+  comment: FormGroup;
   private _newCommentpushed: Comment;
 
   constructor(private fb: FormBuilder, private _summaryDataService: SummaryDataService) { }

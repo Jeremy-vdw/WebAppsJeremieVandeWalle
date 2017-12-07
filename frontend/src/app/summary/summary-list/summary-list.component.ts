@@ -15,12 +15,11 @@ export class SummaryListComponent implements OnInit {
   private _summaries: Summary[];
   private _courseYears: string[] = ['1TIN', '2TIN', '3TIN'];
   private _courses: Course[];
-  private _text: string;
-  private _selectedCourseYear: string;
-  private _selectedCourse: Course;
+  text: string;
+  selectedCourseYear: string;
+  selectedCourse: Course;
   private _disableCourses: Boolean = true;
   private _filter: Filter;
-  link = '../../../assets/pdf-examples/Voorbeeldexamen1516_Oplossing.pdf';
 
   constructor(private _summaryDataService: SummaryDataService) {
     this._filter = new Filter();
@@ -41,8 +40,8 @@ export class SummaryListComponent implements OnInit {
   }
   /* called when courseYear changed -> reset course */
   courseYearChanged(courseYear) {
-    this._selectedCourseYear = courseYear;
-    this._selectedCourse = new Course(null, null);
+    this.selectedCourseYear = courseYear;
+    this.selectedCourse = new Course(null, null);
     this._summaryDataService.getCoursesByCourseYear(courseYear).subscribe(items => this._courses = items);
     this._disableCourses = false;
     this._filter.courseName = '';
@@ -56,9 +55,9 @@ export class SummaryListComponent implements OnInit {
   }
   /* reset all filters */
   resetFilters() {
-    this._selectedCourseYear = '';
-    this._text = '';
-    this._selectedCourse = new Course(null, null);
+    this.selectedCourseYear = '';
+    this.text = '';
+    this.selectedCourse = new Course(null, null);
     this._disableCourses = true;
     this._filter = new Filter();
     this.updateSummaries();
@@ -76,16 +75,6 @@ export class SummaryListComponent implements OnInit {
     return this._courses;
   }
 
-  get text(): string {
-    return this._text;
-  }
-
-  get selectedCourseYear(): string {
-    return this._selectedCourseYear;
-  }
-  get selectedCourse(): Course {
-    return this._selectedCourse;
-  }
   /* user can only select course when courseyear is selected */
   get disableCourses(): Boolean {
     return this._disableCourses;

@@ -12,10 +12,9 @@ import { Summary } from '../../models/summary.model';
 export class SummaryComponent implements OnInit {
   @Input() public summary: Summary;
   public transitionController = new TransitionController();
-  pdfLink = '../../../assets/pdf-examples/Summary.pdf';
-
-  constructor(private router: Router, private _summaryDataService: SummaryDataService) {
-
+  router: Router;
+  constructor(router: Router, private _summaryDataService: SummaryDataService) {
+    this.router = router;
   }
 
   ngOnInit() {

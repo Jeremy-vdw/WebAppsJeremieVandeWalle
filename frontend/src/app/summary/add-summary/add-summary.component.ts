@@ -24,7 +24,7 @@ function linkValidator(): ValidatorFn {
 
 export class AddSummaryComponent implements OnInit {
   @Output() public newSummary = new EventEmitter<Summary>();
-  private summary: FormGroup;
+  summary: FormGroup;
   private _academicYears: AcademicYear[];
   private _selectedAcademicYear: AcademicYear;
   private _courseYears: string[] = ['1TIN', '2TIN', '3TIN'];
