@@ -1,0 +1,2 @@
+export SUMMARY_BACKEND_SECRET="IfThisEndsUpInGithubYouFailTheClass";
+export SUMMARY_DATABASE="mongodb://admin:admin@ds119446.mlab.com:19446/summarydb";
