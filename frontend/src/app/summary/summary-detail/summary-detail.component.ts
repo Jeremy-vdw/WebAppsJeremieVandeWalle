@@ -73,8 +73,9 @@ export class SummaryDetailComponent implements OnInit {
       let sum = 0;
       this._summary.ratings.forEach(item => sum += item.number);
       this.averageRating = sum / this._summary.ratings.length;
-    }
+    } else {
    this.averageRating = 0;
+    }
   }
 
   download() {
