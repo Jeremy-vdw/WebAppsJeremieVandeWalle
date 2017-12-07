@@ -1,0 +1,42 @@
+<div class="ui two column stackable grid container">
+    <div class="four wide column">
+      <div class="ui segment">
+        <h3>Filter samenvattingen</h3>
+        <div class="ui list">
+            <div class="item">
+                <div class="ui fluid icon input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="Zoek..." [(ngModel)]="text" (input)="filterSummaries($event.target.value)">
+                </div>
+            </div>
+            <div class="item">
+                <sui-select class="fluid selection" [(ngModel)]="selectedCourseYear" placeholder="Traject" (selectedOptionChange)="courseYearChanged($event)">
+                    <sui-select-option *ngFor='let courseYear of courseYears' [value]='courseYear'></sui-select-option>
+                  </sui-select>
+            </div>
+            <div class="item">
+                <sui-select class="fluid selection" [(ngModel)]="selectedCourse" labelField="courseName" (selectedOptionChange)="courseChanged($event)" placeholder="Opleidingsonderdeel" [isDisabled]='disableCourses'>
+                    <sui-select-option *ngFor='let course of courses' [value]='course'></sui-select-option>
+                  </sui-select>
+            </div>
+            <div class="item">
+                <div *ngIf="!disableCourses">
+                    <a (click)="resetFilters()"><div class="ui fluid small label" style="text-align: center;font-weight: 400;">
+                        reset filters
+                      </div></a>
+             </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="twelve wide column">
+        <div class="ui segment">
+          <div class="ui divided items">
+          <div class="item" *ngFor="let localSummary of summaries">
+            <app-summary [summary]="localSummary">
+              </app-summary>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

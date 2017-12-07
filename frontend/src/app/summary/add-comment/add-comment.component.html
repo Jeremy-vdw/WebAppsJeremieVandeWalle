@@ -1,0 +1,12 @@
+<form class="ui large form" [formGroup]='comment' (ngSubmit)="OnSubmit()" [suiTransition]="transitionController">
+    <div class="field">
+      <textarea rows="3" formControlName="text"></textarea>
+      <div *ngIf='(comment.get("text").errors?.required || comment.get("text").errors?.minlength) && comment.get("text").touched'
+      class='ui pointing red basic label'>
+      De reactie moet minstens 10 karakters lang zijn.
+    </div>
+    </div>
+    <button type="submit" [disabled]="comment.status !== 'VALID'" class="fluid ui positive icon button">
+        <i class="icon edit"></i> Voeg een reactie toe
+      </button>
+</form>

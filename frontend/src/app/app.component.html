@@ -1,0 +1,104 @@
+<div class="ui container">
+    <div class="ui two column stackable grid container" style="margin-top: 5px;">
+      <div class="sixteen wide column">
+  
+          <div class="ui borderless menu">
+              <a class="header item"
+              routerLink="/summary/list">TIN Samenvattingen</a>
+              <div *ngIf='(currentUser | async) else loginlink' class="right menu">
+                      <a class="item" routerLinkActive='active' routerLink="/summary/add">Voeg samenvatting toe</a>
+                      <a class="item" routerLinkActive='active' routerLink="/summary/me">Bekijk profiel</a>
+                      <a class="item" routerLinkActive='active' routerLink="/logout">log uit</a>
+              </div>
+              <ng-template #loginlink>
+                <div class="right menu">
+                  <a class="item" routerLinkActive='active' routerLink="/login">log in</a>
+                </div>
+                </ng-template>
+            </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+<!-- <div class="ui container">
+    <app-add-summary></app-add-summary>
+    <div class="ui grid segment">
+    <app-summary-list></app-summary-list>
+    </div>
+  </div> --> 
+  <!-- 
+    <app-summary *ngFor="let summary of summaries" 
+      [summary]="summary">
+      </app-summary>
+  -->
+  <!--
+<div class="ui two column stackable grid container" style="margin-top: 100px">
+  <div class="sixteen wide column">
+    <app-search (search)="search($event)"></app-search>
+  </div>
+  <div class="six wide column">
+    <div class="ui form">
+      <div class="ui segments">
+        <div class="ui segment">
+          <h5 class="ui header">
+            <i class="student icon"></i>
+            <div class="content">
+              Richting
+            </div>
+          </h5>
+        </div>
+        <div class="ui segment">
+          <input type="checkbox"> 1TIN
+          <br />
+          <input type="checkbox"> 2TIN
+          <br />
+          <input type="checkbox"> 3TIN
+          <br />
+        </div>
+        <div class="ui segment">
+          <h5 class="ui header">
+            <i class="filter icon"></i>
+            <div class="content">
+              Vak
+            </div>
+          </h5>
+        </div>
+        <div class="ui segment">
+          should show and change on selected richting
+          <br/>
+          <input type="checkbox"> Databanken III
+          <br />
+          <input type="checkbox"> Analys III
+          <br />
+          <input type="checkbox"> Webapps V
+          <br />
+        </div>
+        <div class="ui segment">
+          <h5 class="ui header">
+            <i class="time icon"></i>
+            <div class="content">
+              Academiejaar
+            </div>
+          </h5>
+        </div>
+        <div class="ui segment">
+          <input type="checkbox"> 2017/2018
+          <br/>
+          <input type="checkbox"> 2016/2017
+          <br/>
+          <input type="checkbox"> 2015/2016
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ten wide column">
+      <div class="ui segments">
+              <div class="ui attached segment">
+                first segment
+              </div>
+              <app-summary-test *ngFor="let summary of summaries" [summary]="summary"></app-summary-test>
+        </div>
+  </div>
+</div>
+-->

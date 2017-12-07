@@ -1,0 +1,63 @@
+<!--
+<div class="ui segment">
+  name :  {{summary.name}} <br/>
+  link : {{summary.link}} <br/>
+  course : {{summary.course.courseYear}} - {{summary.course.courseName}} <br/>
+  academicYear : {{summary.academicYear.name}} <br/>
+  Author : {{summary.user.username}} <br />
+  <a class='item' routerLinkActive='active' 
+  routerLink="/summary/{{summary.id}}" >Details</a>
+  <pdf-viewer [src]="pdfSrc"
+  [render-text]="true"
+  [autoresize]="true"
+  [zoom]="0.5"
+  [page]="1"
+  [show-all]="false"
+  style="display: block;"
+></pdf-viewer> 
+</div> -->
+<div class="ui items" [suiTransition]="transitionController">
+<div class="item">
+    <a class="ui small image" routerLinkActive='active' 
+    routerLink="/summary/{{summary.id}}">
+        <pdf-viewer [src]="pdf" [render-text]="true" [zoom]="0.1" [page]="1" [show-all]="false" style="display: block;"></pdf-viewer>
+      </a>
+      <div class="content">
+        <a class="header" routerLinkActive='active' 
+        routerLink="/summary/{{summary.id}}">
+          <div class="ui small breadcrumb">
+            <span class="section">{{summary.course.courseYear}}</span>
+            <i class="right chevron icon divider"></i>
+            <span class="section">{{summary.course.courseName}}</span>
+            <i class="right chevron icon divider"></i>
+            <div class="active section">{{summary.name}}</div>
+          </div>
+        </a>
+        <div class="description">
+            <p><small>Academiejaar: {{summary.academicYear.name}}</small><br/>
+              <small>Auteur: {{summary.user.username}}</small></p>
+            <p style="margin-top: 8px;">
+          <a [className]="labelClass" routerLinkActive='active' 
+          routerLink="/summary/{{summary.id}}">
+              <i class="star icon"></i> {{averageRating}}
+            </a>
+            <a class="ui blue label" routerLinkActive='active' 
+            routerLink="/summary/{{summary.id}}">
+                <i class="comments icon"></i> {{numberOfComments}}
+            </a>
+            <a class="ui label" (click)="deleteSummary()"  *ngIf="router.url === '/summary/me'">
+                <i class="trash icon"></i> Verwijder
+              </a>
+          </p>
+        </div>
+      </div>
+</div>
+</div>
+<!--
+Comments : 
+<ul>
+  <li *ngFor="let comment of comments">
+    <app-comment [name]="comment"></app-comment>
+  </li>
+</ul>
+-->

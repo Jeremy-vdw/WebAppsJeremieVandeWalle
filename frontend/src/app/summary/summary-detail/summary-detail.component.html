@@ -1,0 +1,64 @@
+<div class="ui two column mobile vertically reversed stackable grid container">
+  <div class="ten wide column">
+    <div class="ui segment">
+        <h3 class="ui center aligned header">{{summary.name}}</h3>
+        <pdf-viewer [src]="pdf"
+        [render-text]="true"
+        [original-size]="false"
+        [fit-to-page]="true"
+        [page]="1"
+        style="display: block;"
+      ></pdf-viewer> 
+    </div>
+  </div>
+  <div class="six wide column">
+    <div class="ui segment">
+      <h3>Document Informatie</h3>
+      
+        <div class="ui list">
+            <div class="item">
+              <div class="header" style="margin-bottom: 4px;">Traject</div>
+              {{summary.course.courseYear}} 
+            </div>
+            <div class="item">
+              <div class="header" style="margin-bottom: 4px;">Opleidingsonderdeel</div>
+              {{summary.course.courseName}}
+            </div>
+            <div class="item">
+              <div class="header" style="margin-bottom: 4px;">Academiejaar</div>
+              {{summary.academicYear.name}}
+            </div>
+            <div class="item">
+                <div class="header" style="margin-bottom: 6px;">Auteur</div>
+                <span>
+                <img class="ui avatar image" src="https://randomuser.me/api/portraits/men/{{usernumber}}.jpg">
+                <span>{{summary.user.username}}</span>
+                </span>
+            </div>
+            <div class="item">
+              <div class="header" style="margin-bottom: 6px;">Beoordeling</div>
+              <sui-rating (valueChange)="rateTheSummary($event)" [(ngModel)]="averageRating" [maximum]="10" [isReadonly]="readOnlyRate" ></sui-rating> ({{numberOfRatings}})
+            </div>
+         </div>
+         <button [disabled]="disableDownload" class="fluid ui primary button"  (click)="download()"><i class="download icon"></i>download samenvatting</button>
+         <div class="item" [hidden]="!disableDownload" style="text-align: center;">
+           <small>  <a class="header item" routerLink="/login">Log in</a> in om de samenvatting te downloaden</small>
+         </div>
+    </div>
+    <div class="ui segment">
+      <h3>Reacties</h3>
+      <div *ngIf="summary.comments.length == 0">
+          Er zijn nog geen reacties geplaatst.
+   </div>
+   <div class="ui medium comments">
+      <div *ngFor="let comment of summary.comments">
+        <app-comment [comment]="comment"></app-comment>
+      </div>
+      <div [hidden]="disableDownload">
+          <app-add-comment [summary]="summary" (newComment)="newCommentAdded($event)">
+            </app-add-comment>
+      </div>  
+    </div>
+    </div>
+  </div>
+</div>

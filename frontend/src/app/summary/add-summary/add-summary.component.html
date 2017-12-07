@@ -1,0 +1,76 @@
+<div class="ui grid container">
+    <div class="sixteen wide column">
+<form class="ui large form  clearing segment" [formGroup]='summary' (ngSubmit)="OnSubmit()">
+  <h3 class="ui header">Voeg samenvatting toe</h3>
+  <div class="field">
+    <label for="summaryName">Samenvatting naam: </label>
+    <input id="summaryName" formControlName='name'>
+    <div *ngIf='(summary.get("name").errors?.required || summary.get("name").errors?.minlength) && summary.get("name").touched'
+      class='ui pointing red basic label'>
+      De naam moet minstens 5 karakters lang zijn.
+    </div>
+  </div>
+  <div class="field">
+      <label for="summaryLink">Samenvatting link : </label>
+      <input id="summaryLink" formControlName='link'>
+      <div *ngIf='(summary.get("link").errors?.required || summary.get("link").errors?.pdfExtension) && summary.get("name").touched'
+      class='ui pointing red basic label'>
+      De link naar de samenvatting moet een pdf zijn.
+    </div>
+    </div>
+  <div class="fields">
+    <div class="four wide field">
+      <label>Academiejaar</label>
+      <sui-select class="selection" labelField="name" placeholder="Academiejaar" formControlName="academicYear">
+        <sui-select-option *ngFor='let academicYear of academicYears' [value]='academicYear'></sui-select-option>
+      </sui-select>
+      <div *ngIf='summary.get("academicYear").errors?.required && summary.get("academicYear").touched' class='ui pointing red basic label'>
+        Het academiejaar is verplicht te selecteren.
+      </div>
+    </div>
+    <div class="four wide field">
+      <label>Traject</label>
+      <sui-select class="selection" placeholder="Traject" (selectedOptionChange)="selectionChanged($event)" formControlName="courseYear">
+        <sui-select-option *ngFor='let courseYear of courseYears' [value]='courseYear'></sui-select-option>
+      </sui-select>
+      <div *ngIf='summary.get("courseYear").errors?.required && summary.get("courseYear").touched' class='ui pointing red basic label'>
+        Het traject is verplicht te selecteren.
+      </div>
+    </div>
+    <div class="eight wide field">
+      <label>Opleidingsonderdeel</label>
+      <sui-select class="selection" labelField="courseName" placeholder="Opleidingsonderdeel" formControlName="course" [isDisabled]='disableCourses'>
+        <sui-select-option *ngFor='let course of courses' [value]='course'></sui-select-option>
+      </sui-select>
+      <div *ngIf='summary.get("course").errors?.required && summary.get("course").touched' class='ui pointing red basic label'>
+        Het opleidingsonderdeel is verplicht te selecteren.
+      </div>
+    </div>
+  </div>
+  <button type="submit" [disabled]="summary.status !== 'VALID'" class="ui positive right floated button">
+    Voeg samenvatting toe
+  </button>
+</form>
+<i><small>
+    Examples of pdf links (for demo) : 
+  <ul>
+    <li>Voorbeeldexamen1516_Oplossing.pdf</li>
+    <li>AnalyseI</li>
+    <li>ComputernetwerkenSamenvatting</li>
+    <li>financieelManagement</li>
+    <li>POD1</li>
+    <li>AnalyseII</li>
+    <li>Bedrijfsmanagement</li>
+    <li>Besturingssystemen</li>
+    <li>OntwerpenII</li>
+    <li>WebapplicatiesIII</li>
+    <li>AnalyseIII</li>
+    <li>DatabankenIII</li>
+    <li>NativeAppsI</li>
+  </ul>
+ </small></i>
+ </div></div>
+<!-- 
+  {{ summary.get("name").errors | json}} <br/>
+  {{ summary.get("course").errors | json}} <br/>
+  {{ summary.status | json }} -->

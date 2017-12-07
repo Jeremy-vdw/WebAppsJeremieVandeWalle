@@ -1,0 +1,4 @@
+app-env
+app-env.spec
+# dependencies
+/node_modules
