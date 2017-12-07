@@ -5,11 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "node ./bin/www",
-    "postinstall": "ng build -prod --aot",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build -prod --aot"
   },
   "private": true,
   "dependencies": {
