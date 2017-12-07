@@ -41,6 +41,10 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/api/users', users);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 814f354afd5d88dd29eab69c3ea6813b1a402231
 app.use(express.static(path.join(__dirname, 'dist')));
 app.all('*', (req, res) => {
   const indexFile = `${path.join(__dirname, 'dist')}/index.html`
@@ -53,7 +57,10 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 814f354afd5d88dd29eab69c3ea6813b1a402231
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -67,4 +74,9 @@ app.use(function(err, req, res, next) {
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 814f354afd5d88dd29eab69c3ea6813b1a402231
 module.exports = app;

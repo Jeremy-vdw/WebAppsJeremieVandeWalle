@@ -40,6 +40,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 
 app-env
+=======
+>>>>>>> 814f354afd5d88dd29eab69c3ea6813b1a402231
 node_modules
